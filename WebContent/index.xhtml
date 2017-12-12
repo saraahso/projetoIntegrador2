@@ -1,0 +1,43 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+</h:head>
+
+<h:body>
+
+<h:form id="formulario">
+<p:layout fullPage="true">
+ 
+ 	<p:panel id="pnl1" rendered="#{loginController.logado}">
+	    
+	    	<h:outputText value="Croquiteca Virtual Corporation"/>
+	        <p:menubar>
+	        	<p:menuitem value="Home" action="#{loginController.index}" />
+	        	<p:menuitem value="Cadastrar Via" action="#{viaController.paginaCadastro}" />
+	        	<p:menuitem value="Cadastrar Setor" action="#{setorController.paginaCadastro}" />  
+	        	<p:menuitem value="Cadastrar Pais" action="#{paisController.paginaCadastro}" />
+	        </p:menubar>
+	   
+	        <h:outputText value="South unit content." />
+	  <p:commandButton value="map" action="#{setorController.map}" update="formulario"/>
+	   	<p:commandButton value="Deslogar" action="#{loginController.deslogar}" update="formulario"/>
+	        //page code
+	   
+ 	</p:panel>
+ 	<p:panel id="pnl2" rendered="#{!loginController.logado}">
+ 		Insira e-mail:<h:inputText value="#{loginController.userLogado.email}"/><br/>
+		Digite sua senha:<h:inputText value="#{loginController.userLogado.senha}" /><br/><br/>
+			 
+			 <p:commandButton value="Logar" action="#{loginController.logar}" update="formulario"/>
+ 	</p:panel>
+</p:layout>
+
+
+</h:form>
+
+</h:body>
+
+</html>

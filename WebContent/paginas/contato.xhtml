@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+
+<ui:insert name="codecss" />
+<title>Escalador</title>
+<link rel="icon"
+	href="#{pageContext.request.contextPath}../images/logoEscalador.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="stylesheet"
+	href="#{pageContext.request.contextPath}../css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="#{pageContext.request.contextPath}../css/css.css" />
+</head>
+
+<h:body>
+
+
+	<ui:insert name="header">
+		<ui:include
+			src="#{pageContext.request.contextPath}../templateParts/header.xhtml" />
+	</ui:insert>
+
+
+	<div class="container">
+
+		<div class="row titulo">
+			Sobre o projeto #escalador <br /> <img
+				src="#{pageContext.request.contextPath}../images/linha.png" />
+		</div>
+
+		<div class="row">
+
+			<h3>O projeto #escalador,</h3>
+			<br />
+		</div>
+		<div class="row" style="margin-top: 20px; text-align: justify;">
+			<h4>foi criado por apaixonados pela escalada.</h4>
+			<br />
+			<h4>
+				Tendo em vista que a dificuldade para troca de informações de vias,
+				setores e novidades do mundo desse estilo de vida.Tivemos a ideia de
+				criar uma comunidade interativa para que todos os apaixonados pela
+				escalada possam participar e compartilhar suas vivências <br />
+				Toda a interação é feita da forma mais simples possivel para que
+				todos possam participar.
+			</h4>
+
+
+		</div>
+		<div class="row">
+
+			<h3>Mas como eu posso confiar em uma informação de via ou setor?</h3>
+			<br />
+		</div>
+		<div class="row" style="margin-top: 20px; text-align: justify;">
+			<h4>
+				Todos os cadastros de vias são validados por moderadores de regiões
+				na qual se disponibilizam a efetuar a checagem de cada via e setor <br />
+				Além do mais, cada via e setor tem a seção de comentários, na qual
+				cada usuário pode deixar sua experiência para os próximos
+				escaladores
+			</h4>
+
+			<br />
+
+		</div>
+		<div class="row" style="margin-top: 20px; text-align: justify;">
+			<h4>Desejamos que toda a comunidade de escaladores possam
+				usufruir das informações disponibilizadas da melhor forma possivel!
+				Faça parte dessa comunidade</h4>
+		</div>
+		<div class="row" style="margin-top: 20px; text-align: right; margin-bottom: 20px; ">
+
+			<h3 style="color:#000;">Seja +1 escalador</h3>
+			<br />
+		</div>
+	</div>
+	<ui:insert name="footer">
+		<ui:include
+			src="#{pageContext.request.contextPath}../templateParts/footer.xhtml" />
+	</ui:insert>
+</h:body>
+
+</html>

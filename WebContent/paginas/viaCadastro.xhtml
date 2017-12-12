@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+
+<ui:insert name="codecss" />
+<title>Escalador</title>
+<link rel="icon"
+	href="#{pageContext.request.contextPath}../images/logoEscalador.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="stylesheet"
+	href="#{pageContext.request.contextPath}../css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="#{pageContext.request.contextPath}../css/css.css" />
+</h:head>
+<h:body>
+
+	<ui:insert name="header">
+		<ui:include
+			src="#{pageContext.request.contextPath}../templateParts/header.xhtml" />
+	</ui:insert>
+	<h:form id="formulario">
+		<p:growl id="growl" showDetail="true" sticky="true" />
+		<div class="container principal">
+			<div class="row titulo">
+				Cadastro de Via <br /> <img
+					src="#{pageContext.request.contextPath}../images/linha.png" />
+			</div>
+
+			<div class="row">
+				<h3>Hey #escalador,</h3>
+			</div>
+			<div class="row">
+				<h4>Cadastre as informações necessárias da via</h4>
+			</div>
+
+			<div class="row">
+				<span class="titulo">Nome:</span>
+				<h:inputText value="#{setorController.via.nome}" class="form-control" />
+				<br /> <span class="titulo">Conquistador:</span>
+				<h:inputText value="#{setorController.via.conquistador}"
+					class="form-control" />
+				<br /> <span class="titulo">Orientação:</span>
+				<h:inputText value="#{setorController.via.orientacao}"
+					class="form-control" placeholder="Cmon m8!"/>
+
+				
+					<span class="titulo">Selecione o grau:</span>
+					<p:selectOneMenu id="grau" value="#{setorController.via.grau}"
+						converter="grauConverter" var="c" class="form-control">
+						<f:selectItems value="#{viaController.graus}" var="grau"
+							itemLabel="#{grau.bra}" itemValue="#{grau}" />
+						
+						<p:column>
+		                	<h:outputText value="#{c.bra}" />
+		            	</p:column>
+					</p:selectOneMenu>
+					
+ 			
+    			<p:fileUpload fileUploadListener="#{setorController.upload}" mode="advanced" dragDropSupport="false"
+           update="growl" sizeLimit="500000" fileLimit="1" allowTypes="/(\.|\/)(gif|jpe?g|png)$/" multiple="false" class="form-control"/>
+					
+					
+				<p:commandButton value="Cadastrar" update="formulario"
+					action="#{setorController.cadastrarVia}"
+					class="btn btn-dark btnCadastrar" >
+					
+					<f:setPropertyActionListener value="#{loginController.userLogado.id}"
+							target="#{setorController.userLogado}" />
+								
+				</p:commandButton>
+					
+				<p:commandButton value="Voltar" update="formulario"
+					action="#{setorController.goSetorFromSetores}" class="btn btn-dark btnCadastrar"/>
+			</div>
+		</div>
+	</h:form>
+
+	<ui:insert name="footer">
+		<ui:include
+			src="#{pageContext.request.contextPath}../templateParts/footer.xhtml" />
+	</ui:insert>
+
+</h:body>
+
+</html>

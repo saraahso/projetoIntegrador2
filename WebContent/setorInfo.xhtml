@@ -1,0 +1,52 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+	
+</h:head>
+<h:body>
+<h:form prependId="false" id="formulario">
+ 
+ 	<h:outputText value="Nome: #{setorController.setor.nome}"/>
+ 	<br/>
+ 	<h:outputText value="Equipamento necessário: #{setorController.setor.equipamento}"/>
+ 	<br/>
+ 	<h:outputText value="Informações sobre o percurso: #{setorController.setor.percurso}"/>
+ 	<br/>
+ 	<h:outputText value="Bairro, referência, etc: #{setorController.setor.local}"/>
+ 	<br/>
+ 	<h:outputText value="Cidade: #{setorController.setor.cidade.nome}"/>
+ 	<br/>
+ 
+ 	  <p:dataTable var="via" value="#{setorController.viasPorSetor}" style="margin-bottom:40px">
+        <f:facet name="header">
+            Vias do setor
+        </f:facet>
+        <p:column headerText="Id" sortBy="#{via.id}">
+            <h:outputText value="#{via.id}" />
+        </p:column>
+ 
+        <p:column headerText="Nome" sortBy="#{via.nome}">
+            <h:outputText value="#{via.nome}" />
+        </p:column>
+ 
+        <p:column headerText="Conquistador" sortBy="#{via.conquistador}">
+            <h:outputText value="#{via.conquistador}" />
+        </p:column>
+        
+        <p:column headerText="Visualizar" >
+             <p:commandButton action="#{setorController.goVia}" icon="ui-icon-search" title="Abrir">
+                <f:setPropertyActionListener value="#{via}" target="#{setorController.via}" />
+            </p:commandButton>
+        </p:column>
+        
+        <p:column headerText="Nota" sortBy="#{via.nota}">
+            <p:rating value="#{via.nota}" readonly="true" />
+        </p:column>
+        
+    </p:dataTable>
+ 
+</h:form>
+</h:body>
+</html>

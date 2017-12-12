@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+
+<ui:insert name="codecss" />
+<title>Escalador</title>
+<link rel="icon"
+	href="#{pageContext.request.contextPath}../images/logoEscalador.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="stylesheet"
+	href="#{pageContext.request.contextPath}../css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="#{pageContext.request.contextPath}../css/css.css" />
+</h:head>
+
+<h:body>
+
+
+	<ui:insert name="header">
+		<ui:include
+			src="#{pageContext.request.contextPath}../templateParts/header.xhtml" />
+	</ui:insert>
+
+
+	<h:form id="formulario">
+		 <p:growl id="growl" showDetail="true" sticky="true" />  
+		 
+		<div class="container principal">
+
+			<div class="row titulo">
+				Gerenciamento de Usuário <br /> <img
+					src="#{pageContext.request.contextPath}../images/linha.png" />
+			</div>
+			<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 txtCom">
+				<h3>Hey escalador,</h3>
+				<br /> Solicite aqui a moderação de uma região <br />
+				<span class="titulo">Local:</span>
+					<h:inputText value="#{setorController.setor.local}"
+						class="form-control" />
+				<p:commandButton 
+					action="#{usuarioController.usuario.comentarios}"  value="Solicitar" update="formulario"
+					class="btn btn-dark btnCadastrar" />
+				
+			</div>
+
+			<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 cadastro">
+				<span class="titulo">Nome:</span>
+				<h:outputText value="#{usuarioController.usuario.nome}"
+					class="form-control" />
+				<br /> <span class="titulo">E-mail: </span>
+				<h:outputText value="#{usuarioController.usuario.email}"
+					class="form-control" />
+				<br /> <span class="titulo">Nova Senha: </span>
+				<h:inputSecret value="#{usuarioController.usuario.senha}"
+					class="form-control" />
+				<br />
+
+				<p:commandButton value="Cadastrar"
+					action="#{usuarioController.cadastrarUsuario}" update="formulario"
+					class="btn btn-dark btnCadastrar" />
+			</div>
+
+		</div>
+	</h:form>
+	
+	<ui:insert name="footer">
+		<ui:include
+			src="#{pageContext.request.contextPath}../templateParts/footer.xhtml" />
+	</ui:insert>
+</h:body>
+
+</html>

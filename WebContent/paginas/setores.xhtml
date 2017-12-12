@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+
+	<title>Escalador</title>
+	<link rel="icon"
+		href="#{pageContext.request.contextPath}images/logoEscalador.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+	<link rel="stylesheet"
+		href="#{pageContext.request.contextPath}../css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="#{pageContext.request.contextPath}../css/css.css" />
+
+</h:head>
+<h:body>
+	<ui:insert name="header">
+		<ui:include
+			src="#{pageContext.request.contextPath}../templateParts/header.xhtml" />
+	</ui:insert>
+	<h:form prependId="false" id="formulario">
+		<div class="container">
+
+			<div class="row titulo">
+				Setores <br /> <img
+					src="#{pageContext.request.contextPath}../images/linha.png" />
+			</div>
+
+			<div class="row">
+				<h3>Hey #escalador,</h3>
+			</div>
+			<div class="row">
+				<h4>Encontre um novo setor e aventure-se</h4>
+
+			</div>
+
+			<p:dataTable var="obj" value="#{setorController.setores}"
+				style="margin-bottom:40px" class="table">
+
+
+				<p:column headerText="Id" sortBy="#{obj.id}" class="tableTit">
+					<h:outputText value="#{obj.id}" />
+				</p:column>
+
+				<p:column headerText="Nome" sortBy="#{obj.nome}" class="tableTit">
+					<h:outputText value="#{obj.nome}" />
+				</p:column>
+
+
+				<p:column headerText="Local" sortBy="#{obj.local}" class="tableTit">
+					<h:outputText value="#{obj.local}" />
+				</p:column>
+
+				<p:column headerText="Visualizar" class="tableTit">
+					<p:commandButton action="#{setorController.goSetorFromSetores}"
+						value="Visualizar Setor" class="btn btn-dark">
+						<span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+						<f:setPropertyActionListener value="#{obj}"
+							target="#{setorController.setor}" />
+					</p:commandButton>
+				</p:column>
+
+
+			</p:dataTable>
+
+		</div>
+	</h:form>
+	<ui:insert name="footer">
+		<ui:include
+			src="#{pageContext.request.contextPath}../templateParts/footer.xhtml" />
+	</ui:insert>
+</h:body>
+</html>

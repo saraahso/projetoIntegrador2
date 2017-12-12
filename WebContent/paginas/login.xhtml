@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	
+<head>
+
+	<title>Escalador</title>
+	<link rel="icon"
+		href="#{pageContext.request.contextPath}images/logo.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+	<link rel="stylesheet"
+		href="#{pageContext.request.contextPath}../css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="#{pageContext.request.contextPath}../css/css.css" />
+	
+  <!-- JS jQuery Core -->
+
+  <!-- JS jQuery UI -->
+  <script src="../js/jquery-ui/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js" ></script>
+  <script src="../js/jquery-3.1.1.js"></script>
+  <script src="../js/bootstrap.min.js"></script>	
+</head>
+
+<h:body>
+<div class="container">
+
+	<p:dialog 
+				widgetVar="janelaCadastro"
+				header="Cadastrar"
+				class="cadastrarForm"
+				modal="true"
+				showEffect="explode"
+				hideEffect="explode"
+			>
+
+	<h:form id="formularioLogin">
+		<p:panel id="pnl2" rendered="#{!loginController.logado}" style="width: 80%;">
+	        <h2 class="form-signin-heading">Entre com o usuário e senha</h2>
+	        <label for="inputEmail" class="sr-only">Usuário</label>
+	        <h:inputText value="#{loginController.userLogado.email}"
+								class="form-control inputLogin" />
+	        <label for="inputPassword" class="sr-only">Senha</label>
+	        <p:password value="#{loginController.userLogado.senha}"
+								class="form-control inputLogin" />
+	        
+	        <p:commandButton value="Logar" action="#{loginController.logar}"
+								update="formularioLogin" class="btn btn-dark btnLogin" />
+        </p:panel>
+      </h:form>
+		
+    </div>
+    
+    
+    <div class="row">
+					
+						<p:panel id="pnl1" rendered="#{loginController.logado}">
+							<p:menubar
+								class="col-lg-12 col-md-12 col-sm-12 col-xs-12 menuLogado">
+								<p:menuitem value="Cadastrar Pais" includeViewParams="true"
+									actionListener="#{paisController.paginaCadastro}"
+									outcome="/cadastros/cadastroPais.xhtml"
+									class="row itemMenuLogado">
+									<f:param name="faces-redirect" value="true" />
+								</p:menuitem>
+								<p:menuitem value="Cadastrar Usuário" includeViewParams="true"
+									actionListener="#{usuarioController.cadastrarUsuario}"
+									outcome="/cadastros/cadastroUsuario.xhtml"
+									class="row itemMenuLogado">
+									<f:param name="faces-redirect" value="true" />
+								</p:menuitem>
+								<p:menuitem value="Cadastrar Setor" includeViewParams="true"
+									actionListener="#{setorController.cadastrarSetor}"
+									outcome="/cadastros/cadastroSetor.xhtml"
+									class="row itemMenuLogado">
+									<f:param name="faces-redirect" value="true" />
+								</p:menuitem>
+							</p:menubar>
+						</p:panel>
+						
+			
+							
+						
+		 </p:dialog>			
+	</div>
+    
+</h:body>
+</html>

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+
+
+	<ui:insert name="codecss" />
+	<title>Escalador</title>
+	<link rel="icon"
+		href="#{pageContext.request.contextPath}../images/logoEscalador.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+	<link rel="stylesheet"
+		href="#{pageContext.request.contextPath}../css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="#{pageContext.request.contextPath}../css/css.css" />
+</h:head>
+
+<h:body>
+
+	<ui:insert name="header">
+		<ui:include
+			src="#{pageContext.request.contextPath}../templateParts/header.xhtml" />
+	</ui:insert>
+
+	<div class="container principal">
+
+		<div class="row titulo">
+			Cadastro <br /> <img
+				src="#{pageContext.request.contextPath}../images/linha.png" />
+		</div>
+		<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 txtCom">
+			<h3>Hey escalador,</h3>
+			<br /> Fique de olho nas novidades através do<br />
+			<h3>Facebook</h3>
+			e
+			<h3>Instagram,</h3>
+			<br /> Você pode nos enviar mensagens, fotos e videos que serão
+			postados nas #midias <br />
+			<h3>Seja +1 #escalador</h3>
+		</div>
+
+		<div class="col-lg-6 col-sm-6 col-md-6 col-xs-12 cadastro">
+			<div class="tituloPag">#Facebook</div>
+			<div id="fb-root"></div>
+			<iframe
+				src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FProjeto-Escalador-162096941054941%2F"
+				width="800" height="400" style="border: none; overflow: hidden"
+				scrolling="no" frameborder="0" allowTransparency="true"></iframe>
+		
+	</div>
+
+	<div class="tituloPag">#Instagram</div>
+	<!-- SnapWidget -->
+	<iframe src="https://snapwidget.com/embed/468039"
+		class="snapwidget-widget" allowTransparency="true" frameborder="0"
+		scrolling="no"
+		style="border: none; overflow: hidden; width: 800px; height: 390px;     margin-left: 78px;"></iframe>
+
+
+
+
+
+
+	</div>
+
+	<ui:insert name="footer">
+		<ui:include
+			src="#{pageContext.request.contextPath}../templateParts/footer.xhtml" />
+	</ui:insert>
+</h:body>
+</html>

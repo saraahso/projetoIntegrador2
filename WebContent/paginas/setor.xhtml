@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+<script type="text/javascript"
+	src="https://maps.google.com/maps/api/js?key=AIzaSyA2EfajeD4ZxpVG2793C0sXFrgNG6axD7U" />
+<script>
+	function geocode() {
+		PF('geoMap').geocode(document.getElementById('address').value);
+	}
+
+	var currentMarker = null;
+
+	function handlePointClick(event) {
+		if (currentMarker == null) {
+			document.getElementById('lat').value = event.latLng.lat();
+			document.getElementById('lng').value = event.latLng.lng();
+
+			currentMarker = new google.maps.Marker({
+				position : new google.maps.LatLng(event.latLng.lat(),
+						event.latLng.lng())
+			});
+
+			PF('map').addOverlay(currentMarker);
+
+			PF('dlg').show();
+		}
+	}
+
+	function markerAddComplete() {
+		var title = document.getElementById('title');
+		currentMarker.setTitle(title.value);
+		title.value = "";
+
+		//currentMarker = null;
+		PF('dlg').hide();
+	}
+
+	function cancel() {
+		PF('dlg').hide();
+		currentMarker.setMap(null);
+		currentMarker = null;
+
+		return false;
+	}
+</script>
+
+<ui:insert name="codecss" />
+<title>Escalador</title>
+<link rel="icon"
+	href="#{pageContext.request.contextPath}../images/logoEscalador.png" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<link rel="stylesheet"
+	href="#{pageContext.request.contextPath}../css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="#{pageContext.request.contextPath}../css/css.css" />
+</head>
+
+<h:body>
+
+	<ui:insert name="header">
+		<ui:include
+			src="#{pageContext.request.contextPath}../templateParts/header.xhtml" />
+	</ui:insert>
+
+	<div class="container principal">
+		<div class="row titulo">
+			Informações do setor<br /> <img
+				src="#{pageContext.request.contextPath}../images/linha.png" />
+		</div>
+
+
+
+		<h:form prependId="false" id="formulario">
+			
+			<span class="tituloPeq">Nome:</span>
+			<h:outputText value="#{setorController.setor.nome}" class="titulo" />
+			<br />
+			<span class="tituloPeq">Equipamento necessário: </span>
+			<h:outputText value="#{setorController.setor.equipamento}"
+				class="titulo" />
+			<br />
+			<span class="tituloPeq">Informações sobre o percurso:</span>
+			<h:outputText value=" #{setorController.setor.percurso}"
+				class="titulo" />
+			<br />
+			<span class="tituloPeq">Bairro, referência, etc:</span>
+			<h:outputText value=" #{setorController.setor.local}" class="titulo" />
+			<br />
+			<span class="tituloPeq">Cidade:</span>
+			<h:outputText value=" #{setorController.setor.cidade.nome}"
+				class="titulo" />
+			<br /><br/><br/><br/>
+
+			<p:commandButton action="#{setorController.paginaCadastroVia}"
+				title="Cadastrar Nova Via" rendered="#{loginController.logado}"
+				class="btn btn-dark" /><br/>
+
+			<p:dataTable var="via" value="#{setorController.viasPorSetor}"
+				style="margin-bottom:40px" class="table">
+				<f:facet name="header">
+
+					<div class="row titulo">
+						Vias do setor <img
+							src="#{pageContext.request.contextPath}../images/linha.png" />
+					</div>
+				</f:facet>
+				<p:column headerText="Id" sortBy="#{via.id}">
+					<h:outputText value="#{via.id}" />
+				</p:column>
+
+				<p:column headerText="Nome" sortBy="#{via.nome}">
+					<h:outputText value="#{via.nome}" />
+				</p:column>
+
+				<p:column headerText="Conquistador" sortBy="#{via.conquistador}">
+					<h:outputText value="#{via.conquistador}" />
+				</p:column>
+
+				<p:column headerText="Visualizar">
+					<p:commandButton action="#{setorController.goVia}"
+						class="btn btn-dark" icon="ui-icon-search" title="Abrir">
+						<f:setPropertyActionListener value="#{via}"
+							target="#{setorController.via}" />
+					</p:commandButton>
+				</p:column>
+
+				<p:column headerText="Nota" sortBy="#{via.nota}">
+					<p:rating value="#{via.nota}" readonly="true" />
+				</p:column>
+
+			</p:dataTable>
+
+		</h:form>
+
+		<div class="row titulo">
+			Deixe seu Comentário <br /> <img
+				src="#{pageContext.request.contextPath}../images/linha.png" />
+		</div>
+
+		<div class="row">
+			<h3>Hey #escalador,</h3>
+		</div>
+		<div class="row" style="margin-bottom: 25px;">
+			<h4>Tem algum comentário a fazer sobre esse setor? Comente sobre sua
+				experiência...</h4>
+
+		</div>
+		<div id="fb-root"></div>
+		<script>
+			(function(d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0];
+				if (d.getElementById(id))
+					return;
+				js = d.createElement(s);
+				js.id = id;
+				js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.4';
+				fjs.parentNode.insertBefore(js, fjs);
+			}(document, 'script', 'facebook-jssdk'));
+		</script>
+
+		<div class="fb-comments" data-href="http://www.intensocorre.com"
+			data-numposts="5"></div>
+
+	</div>
+</h:body>
+</html>

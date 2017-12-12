@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+
+	<title>Escalador</title>
+	<link rel="icon"
+		href="#{pageContext.request.contextPath}images/logoEscalador.png" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+
+	<link rel="stylesheet"
+		href="#{pageContext.request.contextPath}../css/bootstrap.min.css" />
+	<link rel="stylesheet"
+		href="#{pageContext.request.contextPath}../css/css.css" />
+
+</h:head>
+<h:body>
+	<ui:insert name="header">
+		<ui:include
+			src="#{pageContext.request.contextPath}../templateParts/header.xhtml" />
+	</ui:insert>
+	<h:form prependId="false" id="formulario">
+		<div class="container">
+
+			<div class="row titulo">
+				Informações de Via <br/> <img
+					src="#{pageContext.request.contextPath}../images/linha.png" />
+			</div>
+
+			<div class="row">
+				<h3>Hey #escalador,</h3>
+			</div>
+			<div class="row" style="margin-bottom: 25px;">
+			
+				<h4>Aqui você encontra informações sobre a via!</h4><br/><br/>				
+				<img src="#{pageContext.request.contextPath}../images/#{setorController.url}" style="width:400px;height:350px;" />
+<!-- 					<img src="#{pageContext.request.contextPath}../images/6_cinema7logo-5486089549735373824.png" /> -->
+			</div>
+			
+			<p:growl id="messages" showDetail="true" />
+
+			<span class="tituloPeq">Nome: </span>
+			<h:outputText value="#{setorController.via.nome}" class="titulo" />
+			<br /> <span class="tituloPeq">Grau:</span>
+			<h:outputText value=" #{setorController.via.grau.bra}" class="titulo" />
+			<br /> <span class="tituloPeq">Orientações:</span>
+			<h:outputText value=" #{setorController.via.orientacao}"
+				class="titulo" />
+			<br /> <span class="tituloPeq">Conquistador: </span>
+			<h:outputText value="#{setorController.via.conquistador}"
+				class="titulo" />
+			<br />
+			<p:commandLink action="#{setorController.goSetorFromSetores}"
+				ajax="false">
+				<span class="tituloPeq">Setor: </span>
+				<h:outputText value="#{setorController.setor.nome}" class="titulo" />
+			</p:commandLink>
+			<br />
+			<p:rating value="#{setorController.via.nota}"
+				readonly="#{!loginController.logado}">
+				<p:ajax event="rate" listener="#{setorController.onrate}"
+					update="messages" />
+				<!--  DEU ERRADO SAMERDA   		<f:setPropertyActionListener value="#{loginController.userLogado}" target="#{setorController.nota.usuario}" /> -->
+				<p:ajax event="cancel" listener="#{setorController.oncancel}"
+					update="messages" />
+
+			</p:rating>
+			<p:barcode id="qrCode"
+				value="Nome:#{setorController.via.nome} - Grau: #{setorController.via.grau.bra}"
+				type="qr" style="width:200px;height:200px;align:center;" /><br/>
+			<h4>Qr code com informações desta via. Consulte a administração local antes de fixar na rocha ou nas proximidades.</h4>
+			<p:commandButton value="Imprimir/Baixar" type="button"
+				class="btn btn-dark" style="display:block;margin-bottom: 20px">
+				<p:printer target="qrCode" />
+			</p:commandButton>
+
+		
+
+		<div class="row titulo">
+				Deixe seu Comentário <br /> <img
+					src="#{pageContext.request.contextPath}../images/linha.png" />
+			</div>
+
+			<div class="row">
+				<h3>Hey #escalador,</h3>
+			</div>
+			<div class="row" style="margin-bottom: 25px;">
+				<h4>Tem algum comentário a fazer sobre a via? Comente sobre sua experiência...</h4>
+
+			</div>
+			<div id="fb-root"></div>
+			<script>
+				(function(d, s, id) {
+					var js, fjs = d.getElementsByTagName(s)[0];
+					if (d.getElementById(id))
+						return;
+					js = d.createElement(s);
+					js.id = id;
+					js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&amp;version=v2.4';
+					fjs.parentNode.insertBefore(js, fjs);
+				}(document, 'script', 'facebook-jssdk'));
+			</script>
+			
+			<div class="fb-comments" data-href="http://www.intensocorre.com" data-numposts="5"></div>
+		</div>
+	</h:form>
+	<ui:insert name="footer">
+		<ui:include
+			src="#{pageContext.request.contextPath}../templateParts/footer.xhtml" />
+	</ui:insert>
+</h:body>
+</html>

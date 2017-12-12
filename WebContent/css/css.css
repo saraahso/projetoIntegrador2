@@ -1,0 +1,81 @@
+@CHARSET "UTF-8";
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+
+body{ font-family: 'Roboto', sans-serif;, sans-serif; margin:0px !important; padding: 0px !important; overflow-x:hidden; }
+
+.divLogo{ margin-top: 25px;}
+.logo{max-width: 155px; height:155px; margin-left:50px;}
+.pesquisar{margin-top: 20px;}
+.login{float:right; margin-top: 50px;}
+.rowTopo{background: #5683a2;}
+.rowPreta{background:#000; text-align:right !important; height:42px; padding:2px;}
+.rowPreta a{color:#FFF; font-size:12px;}
+
+.ui-menu .ui-menuitem{ width:150px !important; clear:unset !important; text-align:center; }
+.formMenu .ui-menuitem{font-size: 20px;text-transform:uppercase;font-weight: 800;float:left;list-style:none;text-decoration:none;}
+.formMenu .ui-menuitem a{color:#FFF; text-decoration:none;}
+.formMenu .ui-menuitem:hover{}
+.formMenu .ui-menuitem:hover a{color:#99cccc;;}
+
+.formMenu{height: 34px !important; margin-top: 60px; margin-left:-35px;}
+    
+.formPesquisar{margin-top: -47px;margin-left: 142px;}
+.btnPesquisar{float: right;margin-top: -40px !important;height: 41px !important;width: 93px !important;background: #9cc; color: #000;}
+.ui-button-text .ui-c{top:-5px !important;}
+#formularioLogin input{border:none;}
+
+.login .titulo{ font-size: 12px; color:#FFF; }
+.login .form-control{ width:200px; height: 30px;}
+
+.principal{ padding:25px; margin-top: 25px; text-align:center; display:flow-root !important;}
+.btnCadastrar{ margin-top:5px}
+.btnListar{font-size:12px; padding-top:5px; }
+
+.titulo{font-weight: 500;}
+.tituloPeq{font-weight: 100; font-size: 12px;}
+.rowTitulo{height: 45px !important;background: #e0ddd9; padding:10px; margin-top:20px;margin-bottom:15px; }
+
+.ui-menu{width:100% !important; margin-left: 10px;}
+.menuLogado .ui-menuitem{color: #99cccc;text-transform:uppercase;font-weight: 700;list-style:none;text-decoration:none;margin-top: 5px;margin-left:15px;float: left;}
+.menuLogado .ui-menuitem a{color:#fff; text-decoration:none;}
+.menuLogado .ui-menuitem:hover{background:#FFF; height:25px;}
+.menuLogado .ui-menuitem:hover a{color:#155c8f;}
+
+
+.tituloLogin{font-weight: 500; font-size:12px;color:#FFF; margin-top: 10px;}
+.inputLogin{height:20px !important; width:150px; float:right; margin-top:-3px;}
+.btnLogin{height:20px;font-size:12px;line-height:2px;margin-top: -4px;background: #5683a2;}
+.Clink{color: #f0f0f0; text-decoration:none;}
+
+.tituloPag{font-size:25px; font-weight:600;}
+
+h2{ font-size:22px; margin-right: 20px;}
+h3{font-weight:600; margin:0px; display:inline; color: #32668a;}
+h4{font-weight:300; font-size:18px; display:inline;}
+
+#carousel {margin-top: -4px;height: 450px !important;overflow-y:hidden;}
+#slides ul{left:0 !important;top:0 !important;list-style:none;margin:0;padding:0;height:450px !important;	}
+#slides li {width:100%;height:450px !important;float:left;}
+#slides li img {padding:0px;}
+.buttons {padding:0 0 5px 0;}
+.buttons a {position:absolute; margin-top:250px;outline:0; }
+.buttons a img{width:25px !important;}
+
+.titulo{ font-size:18px; font-weight: bold; text-transform:uppercase; margin-top:20px; margin-bottom:20px; }
+.titulo img{width: 100%;height: 100%; margin-top: 15px;}
+
+.rowFooter{background: #5683a2;text-align:center;display: block !important;color:#FFF;font-size:12px;}
+
+.txtCom{float:left; display:block; height:400px; font-size: 22px; text-align:justify; font-weight:300; padding:25px;}
+
+.cadastro{float:right; height:500px !important; display:block !important; background: #f5f5f56e; padding:25px;}
+
+.ui-selectonemenu-items-wrapper{background: #FFF !important; }
+.ui-selectonemenu-panel .ui-selectonemenu-table td{border: solid 1px #cccccc7a !important;}
+.ui-selectonemenu-panel .ui-selectonemenu-table td:hover{background:#d7dadc;}
+.ui-panel .ui-panel-content{padding: 0px !important;}
+.ui-button-text-only .ui-button-text{padding: 0pc !important;}
+
+.tableTit{ border: solid 1px #cccccc85 !important; text-align:center;}
+
+.ui-dialog{background: #fff;}

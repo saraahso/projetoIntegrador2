@@ -1,0 +1,59 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+</h:head>
+
+<h:body>
+
+<h:form id="formulario">
+<p:layout fullPage="true">
+ 
+    <p:layoutUnit position="north" size="100" resizable="true" closable="false" collapsible="false">
+    	<h:outputText value="Croquiteca Virtual Corporation"/>
+        <p:menubar>
+        	<p:menuitem value="Home" action="#{loginController.index}"/>
+        	<p:menuitem value="Vias"/>
+        	<p:menuitem value="Setores" action="#{setorController.paginaCadastro}"/>     
+        	<p:menuitem value="Cadastrar Pais" action="#{paisController.paginaCadastro}" />
+        </p:menubar>
+    </p:layoutUnit>
+ 
+    <p:layoutUnit position="south" size="100" resizable="true" closable="false" collapsible="false" >
+        <h:outputText value="South unit content." />
+    </p:layoutUnit>
+ 
+ 
+    <p:layoutUnit position="center">
+        <h:inputText value="#{paisController.pais.nome}"/>
+			<br/><br/>
+			<p:commandButton value="Cadastrar país" action="#{paisController.salvarPais}" update="formulario"/><br/><br/>
+			
+			 Nome:<h:inputText value="#{usuarioController.usuario.nome}"/><br/>
+			 E-mail:<h:inputText value="#{usuarioController.usuario.email}"/><br/>
+			 Senha:<h:inputText value="#{usuarioController.usuario.senha}" /><br/><br/>
+			 
+			 <p:commandButton value="Cadastrar usuário" action="#{usuarioController.cadastrarUsuario}" update="formulario"/>
+			 
+			  <p:commandButton value="atualizar lista" actionListener="#{usuarioController.getAll}" update="fonteUser"/>
+			 <p:dataList id="fonteUser" type="definition" value="#{usuarioController.users}" var="item">
+		
+					<p:panel>
+					Nome: #{item.nome}<br/>
+					Email: #{item.email}<br/>
+					</p:panel>
+				
+			</p:dataList>
+			
+    </p:layoutUnit>
+ 
+</p:layout>
+
+
+</h:form>
+
+</h:body>
+
+</html>

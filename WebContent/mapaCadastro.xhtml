@@ -1,0 +1,165 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+    <h:head>
+	
+	<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=AIzaSyA2EfajeD4ZxpVG2793C0sXFrgNG6axD7U"/>
+	<script>
+	    function geocode() {
+	        PF('geoMap').geocode(document.getElementById('address').value);
+	    }
+	 
+	    var currentMarker = null;
+	    
+	    function handlePointClick(event) {
+	        
+	    	if(currentMarker === null) {
+	            document.getElementById('lat').value = event.latLng.lat();
+	            document.getElementById('lng').value = event.latLng.lng();
+	 
+	            currentMarker = new google.maps.Marker({
+	                position:new google.maps.LatLng(event.latLng.lat(), event.latLng.lng())
+	            });
+	            
+	            PF('geoMap').addOverlay(currentMarker);
+	            
+	            PF('dlg').show();
+	        }   
+	    }
+	 
+	    function markerAddComplete() {
+	        var title = document.getElementById('title');
+	        currentMarker.setTitle(title.value);
+	        title.value = "";
+	 
+	        //currentMarker = null;
+	        PF('dlg').hide();
+	    }
+	 
+	    function cancel() {
+	        PF('dlg').hide();
+	        document.getElementById("nomeSetor").value = "";
+	        document.getElementById("latitudeSetor").value = "";
+	        document.getElementById("longitudeSetor").value = "";
+	        currentMarker.setMap(null);
+	        currentMarker = null;
+	 
+	        return false;
+	    }
+	    function remover(){
+	    	currentMarker.setMap(null);
+	        currentMarker = null;
+	    }
+	    
+	</script>
+</h:head>
+<h:body>
+
+	<p:growl id="messages" showDetail="true" />
+	
+	<p:dialog widgetVar="dlg" showEffect="fade">
+	    <h:form prependId="false">
+	        <h:panelGrid columns="2">
+	            <h:outputLabel for="title" value="Nome do setor:" />
+	            <p:inputText id="title" value="#{setorController.setor.nome}" required="true">
+	            	<f:validateLength minimum="2" />
+	            </p:inputText>
+	 
+	            <f:facet name="footer">
+	                <p:commandButton value="Add" actionListener="#{setorController.addMarker}" update=":messages formulario" oncomplete="markerAddComplete()" />
+	                <p:commandButton value="Cancel" onclick="return cancel()" />
+	            </f:facet>
+	        </h:panelGrid>
+	 
+	        <h:inputHidden id="lat" value="#{setorController.setor.latitude}" />
+	        <h:inputHidden id="lng" value="#{setorController.setor.longitude}" />
+	    </h:form>
+	</p:dialog>
+	
+	<h:form prependId="false" id="formMapa">
+	<p:panel rendered="#{setorController.trocaTela}">
+	
+<!-- 		<p:panel id="mapaPanel" header="Escalador" footer="Escalador Project" style="margin-bottom:20px" rendered="#{setorController.trocaTela}"> -->
+	
+		<h3 style="margin-top:0">Geocode</h3>
+	    <h:panelGrid columns="3" style="margin-bottom:10px" cellpadding="5">
+	        <p:outputLabel for="address" value="Address:" />
+	        <p:inputText id="address" />
+	        <p:commandButton value="Geocode" icon="ui-icon-search" onclick="geocode()" type="button" />
+	    </h:panelGrid>
+	    
+	    
+	    
+	    <p:gmap id="geoGmap" widgetVar="geoMap" center="#{setorController.centerGeoMap}" zoom="13" type="HYBRID" style="width:100%;height:400px"
+	    model="#{setorController.geoModel}" onPointClick="handlePointClick(event);" draggable="true">
+	   		<p:ajax event="geocode" listener="#{setorController.onGeocode}" update="@this" />
+	   	</p:gmap>
+	  
+	  	<p:commandButton value="Excluir Marcação" onclick="return cancel()" /><br/>
+	  	
+	 </p:panel>
+	 </h:form>
+ 
+	 <h:form prependId="false" id="formulario">   		   
+   		<p:panel rendered="#{setorController.trocaTela}">
+	     Nome:<h:inputText value="#{setorController.setor.nome}" disabled="true" id="nomeSetor"/><br/>
+		 Equipamento:<h:inputText value="#{setorController.setor.equipamento}"/><br/>
+		 Percurso:<h:inputText value="#{setorController.setor.percurso}" /><br/>
+		 Latitude:<h:inputText value="#{setorController.setor.latitude}" disabled="true" id="latitudeSetor" /><br/>
+		 Longitude:<h:inputText value="#{setorController.setor.longitude}" disabled="true" id="longitudeSetor" /><br/>
+		 local:<h:inputText value="#{setorController.setor.local}" /><br/>
+
+		<p:commandButton value="Cadastrar" update="formulario" action="#{setorController.cadastrarSetor}" />
+		<p:commandButton value="Voltar" update="formulario :formMapa :dropForm" actionListener="#{setorController.confirmarCidade}" /> 
+<!-- 		FAZER O CLICKLONGO EXCLUIR O MARKER PRA VER SE RESOLVE SAMERDA @@@@@@@@@@@@@@@@@@-->
+<!-- 		</p:panel>			 -->
+		</p:panel>
+	 </h:form>
+	 
+   	
+   	 	
+   	 	<h:form id="dropForm" prependId="false">
+   	 	<p:panel id="dropdownPanel" header="Selecionar localização" style="margin-bottom:20px" rendered="#{!setorController.trocaTela}">   	 	
+	   	 	<p:outputLabel for="pais" value="Selecione o país: " />
+		        <p:selectOneMenu id="pais" value="#{setorController.pais}" converter="paisConverter" var="c">
+		       		<p:ajax listener="#{setorController.onCountryChange}" update="estado cidade confirmar" />
+		            <f:selectItem itemLabel="Select One" itemValue="" />
+		            <f:selectItems value="#{setorController.paises}" var="pais" itemLabel="#{pais.nome}" itemValue="#{pais}"/>
+		            
+		            <p:column>
+	                	<h:outputText value="#{c.nome}" />
+	            	</p:column>
+	        </p:selectOneMenu>
+		 	<br/><br/>
+		 	
+		 	<p:outputLabel for="estado" value="Selecione o estado: " />
+		        <p:selectOneMenu id="estado" value="#{setorController.estado}" converter="estadoConverter" var="c" disabled="#{setorController.paisBool}">
+		       	 	<p:ajax listener="#{setorController.onStateChange}" update="cidade confirmar" />
+		            <f:selectItem itemLabel="Select One" itemValue="" />
+		            <f:selectItems value="#{setorController.estados}" var="estado" itemLabel="#{estado.nome}" itemValue="#{estado}"/>
+		            
+		            <p:column>
+	                	<h:outputText value="#{c.nome}" />
+	            	</p:column>
+	        </p:selectOneMenu>
+		 	<br/><br/>
+		 	
+		 	<p:outputLabel for="cidade" value="Selecione a cidade: " />
+		        <p:selectOneMenu id="cidade" value="#{setorController.cidade}" converter="cidadeConverter" var="c" disabled="#{setorController.estadoBool}">
+		            <p:ajax listener="#{setorController.onCityChange}" update="confirmar" />
+		            <f:selectItem itemLabel="Select One" itemValue="" />
+		            <f:selectItems value="#{setorController.cidades}" var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade}"/>
+		            
+		            <p:column>
+	                	<h:outputText value="#{c.nome}" />
+	            	</p:column>
+	        </p:selectOneMenu>
+		 	<br/><br/>
+		 	
+		 	<p:commandButton value="Confirmar cidade" id="confirmar" update="dropForm :formulario :formMapa" disabled="#{setorController.cidadeBool}" action="#{setorController.confirmarCidade}" /> 
+	 	</p:panel>
+	 	</h:form>
+
+</h:body>
+</html>

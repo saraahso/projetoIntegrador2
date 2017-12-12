@@ -1,0 +1,70 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui">
+<h:head>
+
+</h:head>
+
+<h:body>
+
+<h:form id="formulario">
+<p:growl id="growl" showDetail="true" sticky="true" />  
+<p:layout fullPage="true">
+ 
+    <p:layoutUnit position="north" size="100" resizable="true" closable="false" collapsible="false">
+    	<h:outputText value="Croquiteca Virtual Corporation"/>
+        <p:menubar>
+        	<p:menuitem value="Home" action="#{loginController.index}" />
+        	<p:menuitem value="Cadastrar Via" action="#{viaController.paginaCadastro}" />
+        	<p:menuitem value="Cadastrar Setor" action="#{setorController.paginaCadastro}" />  
+        	<p:menuitem value="Cadastrar Pais" action="#{paisController.paginaCadastro}" />
+        </p:menubar>
+    </p:layoutUnit>
+ 
+    <p:layoutUnit position="south" size="100" resizable="true" closable="false" collapsible="false" >
+        <h:outputText value="South unit content." />
+    </p:layoutUnit>
+ 
+ 
+    <p:layoutUnit position="center">        
+			 Nome:<h:inputText value="#{viaController.via.nome}"/><br/>
+			 Conquistador:<h:inputText value="#{viaController.via.conquistador}"/><br/>
+			 Orientação:<h:inputText value="#{viaController.via.orientacao}" /><br/>
+			 
+	 	<p:outputLabel for="grau" value="Selecione o grau: " />
+	 	
+        <p:selectOneMenu id="grau" value="#{viaController.via.grau}" converter="grauConverter" var="c">
+            <f:selectItem itemLabel="Defina a graduação" itemValue="" />
+            <f:selectItems value="#{viaController.graus}" var="grau" itemLabel="#{grau.bra}" itemValue="#{grau}"/>
+            
+            <p:column>
+               	<h:outputText value="#{c.bra}" />
+           	</p:column>
+        </p:selectOneMenu><br/>
+			 
+			 
+   	 	<p:outputLabel for="setor" value="Selecione o setor: " />
+   	 	
+        <p:selectOneMenu id="setor" value="#{viaController.via.setor}" converter="setorConverter" var="c">
+            <f:selectItem itemLabel="Escolha o setor" itemValue="" />
+            <f:selectItems value="#{setorController.setores}" var="setor" itemLabel="#{setor.nome}" itemValue="#{setor}"/>
+            
+            <p:column>
+               	<h:outputText value="#{c.nome}" />
+           	</p:column>
+        </p:selectOneMenu>
+        
+ 	<br/><br/>
+ 	
+ 	<p:commandButton value="Cadastrar" update="formulario" action="#{viaController.cadastrarVia}" />
+  	
+			
+    </p:layoutUnit>
+ 
+	</p:layout>
+</h:form>
+
+</h:body>
+
+</html>
